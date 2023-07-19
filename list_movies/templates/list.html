@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-body" style="text-align: center">
+            <div class="row custom-bg text-white">
+                <div class="col border-end">
+                    <h6> <a class="card-title" href="?{% if sort_by == 'title' %}sort=-title{% else %}sort=title{% endif %}">Title</a> </h6>
+                </div>
+                <div class="col border-end">
+                    <h6 class="card-title">Poster</h6>
+                </div>
+                <div class="col border-end">
+                    <h6>Genre </h6>
+                </div>
+                <div class="col border-end">
+                    <h6> <a class="card-title" href="?{% if sort_by == 'rating' %}sort=-rating{% else %}sort=rating{% endif %}">Rating</a> </h6>
+                </div>
+                <div class="col border-end">
+                    <h6> <a class="card-title" href="?{% if sort_by == 'year_release' %}sort=-year_release{% else %}sort=year_release{% endif %}">Year Release</a> </h6>
+                </div>
+                <div class="col border-end">
+                    <h6> <a class="card-title" href="?{% if sort_by == 'metacritic_rating' %}sort=-metacritic_rating{% else %}sort=metacritic_rating{% endif %}">Metacritic Rating</a> </h6>
+                </div>
+                <div class="col">
+                    <h6> Runtime </h6>
+                </div>
+            </div>
+            <hr class="my-0">
+
+            {% for movie in movies %}
+            <div class="row movie-item border-top">
+                <div class="col border-end">
+                    <p>{{ movie.title }}</p>
+                </div>
+                <div class="col border-end">
+                    <img src="{{ movie.poster.url }}" alt="{{ movie.title }}" class="movie-poster">
+                </div>
+                <div class="col border-end">
+                    <p>{% for genre in movie.genres.all %}{{ genre.name }}, {% endfor %}</p>
+                </div>
+                <div class="col border-end">
+                    <p>{{ movie.rating }}</p>
+                </div>
+                <div class="col border-end">
+                    <p>{{ movie.year_release }}</p>
+                </div>
+                <div class="col border-end">
+                    <p>{{ movie.metacritic_rating }}</p>
+                </div>
+                <div class="col">
+                    <p>{{ movie.runtime }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
